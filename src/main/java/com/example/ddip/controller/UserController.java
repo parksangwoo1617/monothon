@@ -3,6 +3,8 @@ package com.example.ddip.controller;
 import com.example.ddip.dto.request.LoginRequest;
 import com.example.ddip.dto.request.RegisterGoodsRequest;
 import com.example.ddip.dto.request.SignUpRequest;
+import com.example.ddip.dto.response.GoodsDetailInfoResponse;
+import com.example.ddip.dto.response.GoodsInfoListResponse;
 import com.example.ddip.dto.response.TokenResponse;
 import com.example.ddip.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,4 +37,13 @@ public class UserController {
         userService.registerGoods(request);
     }
 
+    @GetMapping("/goods")
+    public GoodsInfoListResponse getGoodsList() {
+        return userService.getGoodsInfoList();
+    }
+
+    @GetMapping("/goods/{goods_id}")
+    public List<GoodsDetailInfoResponse> getGoodsDetailInfo(@PathVariable("goods_id") Integer goods_id) {
+        return userService.getGoodsDetailInfo(goods_id);
+    }
 }

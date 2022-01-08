@@ -86,7 +86,7 @@ public class UserService {
 
     public GoodsInfoListResponse getGoodsInfoList() {
         return GoodsInfoListResponse.builder()
-                .goods_list(goodsRepository.findAllByOrderByIdDesc()
+                .goods_list(goodsRepository.findAllByGoodsStatus("판매 중")
                         .stream().map(goods -> GoodsInfoListResponse.of(
                                 goods.getId(),
                                 checkNull(goods.getImage()),
@@ -111,6 +111,7 @@ public class UserService {
                         .time(goods.getTime())
                         .price(goods.getPrice())
                         .description(goods.getDescription())
+                        .status(goods.getStatus())
                         .build()
                 ).collect(Collectors.toList());
     }

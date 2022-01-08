@@ -11,6 +11,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@NamedQuery(
+        name = "Goods.findAllByGoodsStatus",
+        query = "select g from Goods g where g.status = :status order by g.id DESC"
+)
 public class Goods {
     @Id
     @GeneratedValue

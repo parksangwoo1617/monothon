@@ -10,9 +10,7 @@ public class UserFacade {
 
     public String getId() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("testsetstsetsetsetse " + authentication.getName());
         if(authentication == null || authentication.getPrincipal() == null) {
-            System.out.println("NULL CHECK");
             throw new CredentialsNotFoundException();
         }
 

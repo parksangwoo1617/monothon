@@ -1,0 +1,34 @@
+cloud:
+  aws:
+    s3:
+      bucket: ddip
+      host: ${S3_HOST_NAME}
+    region:
+      static: ap-northeast-2
+    credentials:
+      accessKey: ${ACCESS_KEY}
+      secretKey: ${SECRET_KEY}
+
+jwt:
+  secret: secret
+  access:
+    exp: ${JWT_ACCESS_EXP}
+  header: ${JWT_HEADER}
+  prefix: ${JWT_PREFIX}
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    databae: mysql
+  datasource:
+    url: ${JDBC_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ${DATABASE_PASSWORD}
+    username: ${DATABASE_USERNAME}
+    jackson:
+      property-naming-strategy: SNAKE_CASE
+
+server:
+  port: 8081

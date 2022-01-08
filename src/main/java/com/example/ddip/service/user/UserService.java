@@ -81,7 +81,7 @@ public class UserService {
                 .build()
         );
 
-        saveGoodsAttachment(goods, request.getGoods_image(), goods::setImage);
+        saveGoodsAttachment(goods, request.getGoods_image());
     }
 
     public GoodsInfoListResponse getGoodsInfoList() {
@@ -122,11 +122,12 @@ public class UserService {
         return attachment.getFile_name();
     }
 
-    private void saveGoodsAttachment(Goods goods, MultipartFile file, Consumer<Attachment> consumer) {
+    private void saveGoodsAttachment(Goods goods, MultipartFile file) {
         Optional<String> savedFile = saveFileToStorage(file, "goods" + "/" + goods.getId());
         if (savedFile.isPresent()) {
             Attachment attachment = saveFileToDatabase(savedFile.get(), file.getOriginalFilename());
-            consumer.accept(attachment);
+            goods.setImage(attachment);
+            goodsRepository.save(goods);
         }
     }
 

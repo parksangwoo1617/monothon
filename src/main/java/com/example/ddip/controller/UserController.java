@@ -49,7 +49,7 @@ public class UserController {
 
     @PutMapping("/goods/{goods_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void modifyStatus(@PathVariable("goods_id") Integer goods_id) {
-        userService.modifyStatus("판매 대기", goods_id);
+    public String modifyStatus(@PathVariable("goods_id") Integer goods_id) {
+        return userService.modifyStatus("판매 대기", goods_id);
     }
 }

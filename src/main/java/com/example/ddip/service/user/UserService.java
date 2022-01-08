@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -119,11 +120,25 @@ public class UserService {
                 ).collect(Collectors.toList());
     }
 
-    public void modifyStatus(String status, Integer goods_id) {
+    public String modifyStatus(String status, Integer goods_id) {
         Goods goods = goodsRepository.findById(goods_id)
                 .orElseThrow(UserNotFoundException::new);
         goods.setStatus(status);
         goodsRepository.save(goods);
+        return generatedRandomCode();
+    }
+
+    private String generatedRandomCode() {
+        int leftLimit = 48;
+        int rightLimit = 122;
+        int targetStringLength = 6;
+        Random random = new Random();
+
+        return random.ints(leftLimit,rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
     }
 
     private String checkNull(Attachment attachment) {

@@ -13,7 +13,7 @@ public class GoodsDetailInfoResponse {
     private final String nickname;
     private final String category;
     private final String goods_name;
-    private final LocalDateTime time;
+    private final String time;
     private final String price;
     private final String description;
 }

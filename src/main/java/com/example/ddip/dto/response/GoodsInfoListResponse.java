@@ -21,7 +21,7 @@ public class GoodsInfoListResponse {
         private final String category;
         private final String nickname;
         private final String goods_name;
-        private final LocalDateTime time;
+        private final String time;
         private final String price;
     }
 
@@ -31,7 +31,7 @@ public class GoodsInfoListResponse {
             String category,
             String nickname,
             String goods_name,
-            LocalDateTime time,
+            String time,
             String price
     ) {
         return new GoodsInfo(goods_id, image_url, category, nickname, goods_name, time, price);

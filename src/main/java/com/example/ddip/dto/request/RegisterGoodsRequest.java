@@ -28,7 +28,7 @@ public class RegisterGoodsRequest {
     private String category;
 
     @NotNull
-    private LocalDateTime time;
+    private String time;
 
     private MultipartFile goods_image;
 }

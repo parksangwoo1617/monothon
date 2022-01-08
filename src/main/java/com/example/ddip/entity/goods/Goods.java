@@ -30,7 +30,7 @@ public class Goods {
     private String category;
 
     @Column(nullable = false)
-    private LocalDateTime time;
+    private String time;
 
     @Column(length = 100, nullable = false)
     private String status;

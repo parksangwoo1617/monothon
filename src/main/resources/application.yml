@@ -1,5 +1,7 @@
 cloud:
   aws:
+    stack:
+      auto: false
     s3:
       bucket: ddip
       host: ${S3_HOST_NAME}

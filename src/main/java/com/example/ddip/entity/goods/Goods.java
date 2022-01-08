@@ -5,7 +5,6 @@ import com.example.ddip.entity.user.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -40,7 +39,7 @@ public class Goods {
     private User user;
 
     @Setter
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "image")
     private Attachment image;
 }

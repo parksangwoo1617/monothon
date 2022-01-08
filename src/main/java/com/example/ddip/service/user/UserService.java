@@ -126,6 +126,7 @@ public class UserService {
         Optional<String> savedFile = saveFileToStorage(file, "goods" + "/" + goods.getId());
         if (savedFile.isPresent()) {
             Attachment attachment = saveFileToDatabase(savedFile.get(), file.getOriginalFilename());
+            System.out.println("testestsetsetsetsetsetsetsete");
             consumer.accept(attachment);
         }
     }

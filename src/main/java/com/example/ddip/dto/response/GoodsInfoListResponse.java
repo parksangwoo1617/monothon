@@ -23,6 +23,7 @@ public class GoodsInfoListResponse {
         private final String goods_name;
         private final String time;
         private final String price;
+        private final String location;
     }
 
     public static GoodsInfo of(
@@ -32,8 +33,9 @@ public class GoodsInfoListResponse {
             String nickname,
             String goods_name,
             String time,
-            String price
+            String price,
+            String location
     ) {
-        return new GoodsInfo(goods_id, image_url, category, nickname, goods_name, time, price);
+        return new GoodsInfo(goods_id, image_url, category, nickname, goods_name, time, price, location);
     }
 }

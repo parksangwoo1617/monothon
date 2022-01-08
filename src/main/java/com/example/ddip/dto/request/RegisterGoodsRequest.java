@@ -30,5 +30,8 @@ public class RegisterGoodsRequest {
     @NotNull
     private String time;
 
+    @NotNull
+    private String location;
+
     private MultipartFile goods_image;
 }

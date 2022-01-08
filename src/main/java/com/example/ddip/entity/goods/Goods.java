@@ -35,6 +35,10 @@ public class Goods {
     @Column(nullable = false)
     private String time;
 
+    @Column(nullable = false)
+    private String location;
+
+    @Setter
     @Column(length = 100, nullable = false)
     private String status;
 

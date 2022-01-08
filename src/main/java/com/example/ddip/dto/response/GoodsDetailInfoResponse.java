@@ -17,4 +17,5 @@ public class GoodsDetailInfoResponse {
     private final String price;
     private final String description;
     private final String status;
+    private final String location;
 }

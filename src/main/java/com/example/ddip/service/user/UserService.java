@@ -78,6 +78,7 @@ public class UserService {
                 .user(userRepository.findById(userFacade.getId())
                         .orElseThrow(UserNotFoundException::new))
                 .status("판매 중")
+                .location(request.getLocation())
                 .build()
         );
 
@@ -94,7 +95,8 @@ public class UserService {
                                 goods.getCategory(),
                                 goods.getName(),
                                 goods.getTime(),
-                                goods.getPrice()
+                                goods.getPrice(),
+                                goods.getLocation()
                         ))
                         .collect(Collectors.toList())
                 ).build();
@@ -112,8 +114,16 @@ public class UserService {
                         .price(goods.getPrice())
                         .description(goods.getDescription())
                         .status(goods.getStatus())
+                        .location(goods.getLocation())
                         .build()
                 ).collect(Collectors.toList());
+    }
+
+    public void modifyStatus(String status, Integer goods_id) {
+        Goods goods = goodsRepository.findById(goods_id)
+                .orElseThrow(UserNotFoundException::new);
+        goods.setStatus(status);
+        goodsRepository.save(goods);
     }
 
     private String checkNull(Attachment attachment) {

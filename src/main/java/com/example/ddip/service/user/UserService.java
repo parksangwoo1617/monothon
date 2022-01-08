@@ -77,6 +77,7 @@ public class UserService {
                 .time(request.getTime())
                 .user(userRepository.findById("chawe135")
                         .orElseThrow(UserNotFoundException::new))
+                .status("판매 중")
                 .build()
         );
 

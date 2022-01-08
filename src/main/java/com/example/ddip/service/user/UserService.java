@@ -132,6 +132,7 @@ public class UserService {
 
     private Optional<String> saveFileToStorage(MultipartFile file, String directoryName) {
         if (file == null || file.isEmpty() || file.getOriginalFilename() == null) {
+            System.out.println("testsetstsetsetsetsetsetstsetsetset");
             return Optional.empty();
         }
         return Optional.of(s3Util.saveFile(file, directoryName));

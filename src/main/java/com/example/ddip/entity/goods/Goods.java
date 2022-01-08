@@ -43,8 +43,12 @@ public class Goods {
     private String status;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "seller_id")
+    private User seller;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "consumer_id")
+    private User consumer;
 
     @Setter
     @OneToOne(fetch = FetchType.EAGER)

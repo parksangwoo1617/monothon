@@ -75,7 +75,7 @@ public class UserService {
                 .description(request.getDescription())
                 .category(request.getCategory())
                 .time(request.getTime())
-                .user(userRepository.findById(userFacade.getId())
+                .seller(userRepository.findById(userFacade.getId())
                         .orElseThrow(UserNotFoundException::new))
                 .status("판매 중")
                 .location(request.getLocation())
@@ -91,7 +91,7 @@ public class UserService {
                         .stream().map(goods -> GoodsInfoListResponse.of(
                                 goods.getId(),
                                 checkNull(goods.getImage()),
-                                goods.getUser().getNickname(),
+                                goods.getSeller().getNickname(),
                                 goods.getCategory(),
                                 goods.getName(),
                                 goods.getTime(),

@@ -40,7 +40,7 @@ public class Goods {
     private User user;
 
     @Setter
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "image")
     private Attachment image;
 }

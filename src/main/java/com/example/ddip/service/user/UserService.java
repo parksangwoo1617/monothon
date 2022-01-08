@@ -94,8 +94,8 @@ public class UserService {
                         .stream().map(goods -> GoodsInfoListResponse.of(
                                 goods.getId(),
                                 checkNull(goods.getImage()),
-                                goods.getSeller().getNickname(),
                                 goods.getCategory(),
+                                goods.getSeller().getNickname(),
                                 goods.getName(),
                                 goods.getTime(),
                                 goods.getPrice(),

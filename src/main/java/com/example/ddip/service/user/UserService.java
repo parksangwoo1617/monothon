@@ -4,8 +4,10 @@ import com.example.ddip.config.S3Util;
 import com.example.ddip.dto.request.LoginRequest;
 import com.example.ddip.dto.request.RegisterGoodsRequest;
 import com.example.ddip.dto.request.SignUpRequest;
+import com.example.ddip.dto.request.VerifyCodeRequest;
 import com.example.ddip.dto.response.GoodsDetailInfoResponse;
 import com.example.ddip.dto.response.GoodsInfoListResponse;
+import com.example.ddip.dto.response.MypageResponse;
 import com.example.ddip.dto.response.TokenResponse;
 import com.example.ddip.entity.attachment.Attachment;
 import com.example.ddip.entity.attachment.AttachmentRepository;
@@ -124,8 +126,54 @@ public class UserService {
         Goods goods = goodsRepository.findById(goods_id)
                 .orElseThrow(UserNotFoundException::new);
         goods.setStatus(status);
+        String code = generatedRandomCode();
+        goods.setVerifyCode(code);
         goodsRepository.save(goods);
-        return generatedRandomCode();
+        return code;
+    }
+
+    public void successPay(VerifyCodeRequest request) {
+        Goods goods = goodsRepository.findByVerifyCode(request.getVerify_code())
+                .orElseThrow(InvalidCodeException::new);
+        if (goods.getSeller() != userRepository.findById(userFacade.getId()).orElseThrow(UserNotFoundException::new)) {
+            throw new InvalidCodeException();
+        } else {
+            goods.setStatus("판매 완료");
+            goodsRepository.save(goods);
+        }
+    }
+
+    public MypageResponse getMyInfo() {
+        User user = userRepository.findById(userFacade.getId())
+                .orElseThrow(UserNotFoundException::new);
+
+        return MypageResponse.builder()
+                .nickname(user.getNickname())
+                .user_id(userFacade.getId())
+                .sale_list(goodsRepository.findAllBySeller(user)
+                        .stream().map(goods -> MypageResponse.of(
+                                goods.getId(),
+                                goods.getSeller().getNickname(),
+                                goods.getImage().getFile_name(),
+                                goods.getName(),
+                                goods.getLocation(),
+                                goods.getTime(),
+                                goods.getPrice(),
+                                goods.getCategory()
+                        )).collect(Collectors.toList())
+                )
+                .purchase_list(goodsRepository.findAllByConsumer(user)
+                        .stream().map(goods -> MypageResponse.of(
+                                goods.getId(),
+                                goods.getConsumer().getNickname(),
+                                goods.getImage().getFile_name(),
+                                goods.getName(),
+                                goods.getLocation(),
+                                goods.getTime(),
+                                goods.getPrice(),
+                                goods.getCategory()
+                        )).collect(Collectors.toList())
+                ).build();
     }
 
     private String generatedRandomCode() {

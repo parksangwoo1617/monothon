@@ -42,7 +42,8 @@ public class Goods {
     @Column(length = 100, nullable = false)
     private String status;
 
-    private String verify_code;
+    @Setter
+    private String verifyCode;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seller_id")

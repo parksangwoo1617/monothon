@@ -17,6 +17,7 @@ public enum ErrorCode {
     ALREADY_EXIST_ID(409, "Already Exist Id"),
     ALREADY_EXIST_NAME(409, "Already Exist Name"),
     UNEXPECTED_ERROR(500, "Unexpected Error"),
+    INVALID_CODE(400, "Invalid Code"),
     ALREADY_EXIST_NUMBER(409, "Already Exist Phone Number");
 
     private final int status;

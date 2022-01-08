@@ -75,7 +75,7 @@ public class UserService {
                 .description(request.getDescription())
                 .category(request.getCategory())
                 .time(request.getTime())
-                .user(userRepository.findById("chawe135")
+                .user(userRepository.findById(userFacade.getId())
                         .orElseThrow(UserNotFoundException::new))
                 .status("판매 중")
                 .build()

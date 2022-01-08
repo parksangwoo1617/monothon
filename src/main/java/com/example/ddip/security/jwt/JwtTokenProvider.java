@@ -33,11 +33,11 @@ public class JwtTokenProvider {
 
     private final AuthDetailsService authDetailsService;
 
-    public String generateAccessToken(String email) {
+    public String generateAccessToken(String id) {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, getSecretKey())
                 .setHeaderParam("typ", "JWT")
-                .setSubject(email)
+                .setSubject(id)
                 .claim("type", "access")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + accessExp * 1000))
@@ -47,6 +47,7 @@ public class JwtTokenProvider {
     public String resolveToken(HttpServletRequest request) {
         String bearer = request.getHeader(header);
         if (bearer != null && bearer.length() > 7 && bearer.startsWith(prefix)) {
+            System.out.println("twetstsetsetsetsetsets");
             return bearer.substring(7);
         }
         return null;

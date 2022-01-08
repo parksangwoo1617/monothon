@@ -41,6 +41,6 @@ public class Goods {
 
     @Setter
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "image_id")
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Attachment image;
 }

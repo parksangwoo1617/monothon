@@ -150,7 +150,7 @@ public class UserService {
         return MypageResponse.builder()
                 .nickname(user.getNickname())
                 .user_id(userFacade.getId())
-                .sale_list(goodsRepository.findAllBySeller(user)
+                .sale_list(goodsRepository.findAllBySeller("판매 완료", user)
                         .stream().map(goods -> MypageResponse.of(
                                 goods.getId(),
                                 goods.getSeller().getNickname(),
@@ -162,7 +162,7 @@ public class UserService {
                                 goods.getCategory()
                         )).collect(Collectors.toList())
                 )
-                .purchase_list(goodsRepository.findAllByConsumer(user)
+                .purchase_list(goodsRepository.findAllByConsumer("판매 중", user)
                         .stream().map(goods -> MypageResponse.of(
                                 goods.getId(),
                                 goods.getConsumer().getNickname(),

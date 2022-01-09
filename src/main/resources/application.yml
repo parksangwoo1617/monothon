@@ -22,7 +22,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     databae: mysql
   datasource:
     url: ${JDBC_URL}
